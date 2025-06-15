@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: "\uC131\uB3D9"
+  m_EditorClassIdentifier: Assembly-CSharp::Map
+  sprite: {fileID: 21300000, guid: 3bb528f1533f8a74cbb558853747a0b9, type: 3}
+  mapInfo: "\uC131\uC218\uB3D9\uC758 \uCE74\uD398\uC640 \uACF5\uC7A5\uC740 \uC7AC\uB8CC
+    \uC218\uC9D1\uACFC \uBB34\uAE30 \uC81C\uC791 \uAE30\uC9C0\uB85C \uBCC0\uBAA8\uD588\uB2E4.
+    \uD55C\uAC15\uBCC0\uC740 \uD0C8\uCD9C\uB85C\uC774\uB098 \uC880\uBE44 \uCE68\uC785\uC774
+    \uC7A6\uC73C\uBA70, \uC655\uC2ED\uB9AC\uB294 \uBE44\uAD50\uC801 \uD3C9\uC628\uD558\uB2E4.
+    \uC131\uC218\uB3D9 \uACF5\uC7A5 \uC9C0\uB300\uC5D0\uC11C\uB294 \uD3D0\uAE30\uBB3C\uACFC
+    \uAE30\uACC4\uB85C \uD2B8\uB7A9\uC744 \uC81C\uC791\uD558\uACE0, \uC0DD\uC874\uC790\uB4E4\uC740
+    \uD3D0\uC790\uC7AC\uB85C \uBC29\uC5B4\uAD6C\uC640 \uBB34\uAE30\uB97C \uB9CC\uB4E0\uB2E4."
