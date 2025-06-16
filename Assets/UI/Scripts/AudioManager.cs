@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        int random = Random.RandomRange(0, backgroundMusicClips.Length);
+        int random = Random.Range(0, backgroundMusicClips.Length);
         audioSource.clip = backgroundMusicClips[random];
     }
 }
