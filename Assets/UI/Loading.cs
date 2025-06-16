@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Loading : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Loading : MonoBehaviour
     [SerializeField] private GameObject complete;
     [SerializeField] private GameObject completeTMP;
     [Header("NextScene")]
-    [SerializeField] private GameObject nextScene;
+    [SerializeField] private string nextScene;
 
     private bool loadingDone = false;
     private void Start()
@@ -27,8 +28,8 @@ public class Loading : MonoBehaviour
 
     public void NextScene()
     {
-        nextScene.SetActive(true);
         gameObject.SetActive(false);
+        SceneManager.LoadScene(nextScene);
     }
 
     IEnumerator LoadingStart()
