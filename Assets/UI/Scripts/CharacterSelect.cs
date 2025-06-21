@@ -6,14 +6,13 @@ using UnityEngine.UI;
 public class CharacterSelect : MonoBehaviour
 {
     [SerializeField] private Sprite sprite;
+    [SerializeField] private Image image;
     [SerializeField] private string characterName;
 
     private TMP_Text text;
-    private Image image;
     void Awake()
     {
         text = GetComponentInChildren<TMP_Text>();
-        image = GetComponentInChildren<Image>();
 
         text.text = characterName;
         image.sprite = sprite;

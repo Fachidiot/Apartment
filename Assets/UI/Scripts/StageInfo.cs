@@ -15,7 +15,7 @@ public class StageInfo : MonoBehaviour
         {
             if (map.name == mapName)
             {
-                text.text = map.name+"±¸";
+                text.text = map.name + "êµ¬";
                 infotext.text = map.mapInfo;
                 image.sprite = map.sprite;
                 image.color = Color.white;

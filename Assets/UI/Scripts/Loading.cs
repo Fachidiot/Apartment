@@ -28,6 +28,7 @@ public class Loading : MonoBehaviour
 
     public void NextScene()
     {
+        AudioManager.Instance.PlayBackgroundMusic();
         gameObject.SetActive(false);
         SceneManager.LoadScene(nextScene);
     }

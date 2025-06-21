@@ -31,6 +31,34 @@ public class Inputs : MonoBehaviour
     [Header("Mouse Cursor Settings")]
     public bool cursorInputForLook = true;
 
+    // Buttons
+    public void MoveLeftDown()
+    {
+        MoveInput(Vector2.left);
+    }
+    public void MoveLeftUp()
+    {
+        MoveInput(Vector2.zero);
+    }
+
+    public void MoveRightDown()
+    {
+        MoveInput(Vector2.right);
+    }
+    public void MoveRightUp()
+    {
+        MoveInput(Vector2.zero);
+    }
+
+    public void InteractiveDown()
+    {
+        InteractInput(true);
+    }
+    public void InteractiveUp()
+    {
+        InteractInput(false);
+    }
+
 #if ENABLE_INPUT_SYSTEM
     public void OnMove(InputValue value)
     {

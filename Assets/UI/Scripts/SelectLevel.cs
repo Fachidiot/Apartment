@@ -30,19 +30,19 @@ public class SelectLevel : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-                tmpText.text = "»ıÁ¸ ÃÊº¸ÀÚ";
+                tmpText.text = "ìƒì¡´ ì´ˆë³´ì";
                 break;
             case Difficulty.Normal:
-                tmpText.text = "»ıÁ¸ ÀÔ¹®ÀÚ";
+                tmpText.text = "ìƒì¡´ ì…ë¬¸ì";
                 break;
             case Difficulty.Difficult:
-                tmpText.text = "»ıÁ¸ Áß±ŞÀÚ";
+                tmpText.text = "ìƒì¡´ ì¤‘ê¸‰ì";
                 break;
             case Difficulty.Hard:
-                tmpText.text = "»ıÁ¸ ¼÷·ÃÀÚ";
+                tmpText.text = "ìƒì¡´ ìˆ™ë ¨ì";
                 break;
             case Difficulty.God:
-                tmpText.text = "»ıÁ¸ Àü¹®°¡";
+                tmpText.text = "ìƒì¡´ ì „ë¬¸ê°€";
                 break;
         }
     }
