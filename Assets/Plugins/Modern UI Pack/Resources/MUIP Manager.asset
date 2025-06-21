@@ -23,14 +23,14 @@ MonoBehaviour:
   buttonDisabledAlpha: 0.4
   dropdownFont: {fileID: 11400000, guid: 4c39c979f4a8d994cb384e4cc9b66898, type: 2}
   dropdownItemFont: {fileID: 11400000, guid: 4c39c979f4a8d994cb384e4cc9b66898, type: 2}
-  dropdownBackgroundColor: {r: 0.21568628, g: 0.29411766, b: 0.37254903, a: 255}
-  dropdownContentBackgroundColor: {r: 0.1764706, g: 0.25490198, b: 0.33333334, a: 255}
+  dropdownBackgroundColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 255}
+  dropdownContentBackgroundColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 255}
   dropdownPrimaryColor: {r: 1, g: 1, b: 1, a: 255}
-  dropdownItemBackgroundColor: {r: 0.13725491, g: 0.21568628, b: 0.29411766, a: 255}
+  dropdownItemBackgroundColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 255}
   dropdownItemPrimaryColor: {r: 1, g: 1, b: 1, a: 255}
   selectorFont: {fileID: 11400000, guid: 4c39c979f4a8d994cb384e4cc9b66898, type: 2}
   selectorColor: {r: 1, g: 1, b: 1, a: 1}
-  selectorHighlightedColor: {r: 0.1764706, g: 0.25490198, b: 0.33333334, a: 1}
+  selectorHighlightedColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   inputFieldFont: {fileID: 11400000, guid: 4c39c979f4a8d994cb384e4cc9b66898, type: 2}
   inputFieldColor: {r: 1, g: 1, b: 1, a: 1}
   modalWindowTitleFont: {fileID: 11400000, guid: 4c39c979f4a8d994cb384e4cc9b66898,
@@ -40,7 +40,7 @@ MonoBehaviour:
   modalWindowTitleColor: {r: 1, g: 1, b: 1, a: 1}
   modalWindowDescriptionColor: {r: 1, g: 1, b: 1, a: 1}
   modalWindowIconColor: {r: 1, g: 1, b: 1, a: 1}
-  modalWindowBackgroundColor: {r: 0.1764706, g: 0.25490198, b: 0.33333334, a: 1}
+  modalWindowBackgroundColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   modalWindowContentPanelColor: {r: 1, g: 1, b: 1, a: 0.039215688}
   notificationTitleFont: {fileID: 11400000, guid: 4c39c979f4a8d994cb384e4cc9b66898,
     type: 2}
@@ -49,7 +49,7 @@ MonoBehaviour:
     type: 2}
   notificationDescriptionFontSize: 18
   notificationThemeType: 0
-  notificationBackgroundColor: {r: 0.1764706, g: 0.25490198, b: 0.33333334, a: 1}
+  notificationBackgroundColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   notificationTitleColor: {r: 1, g: 1, b: 1, a: 1}
   notificationDescriptionColor: {r: 1, g: 1, b: 1, a: 1}
   notificationIconColor: {r: 1, g: 1, b: 1, a: 1}
@@ -82,7 +82,7 @@ MonoBehaviour:
   tooltipFont: {fileID: 11400000, guid: 4c39c979f4a8d994cb384e4cc9b66898, type: 2}
   tooltipFontSize: 22
   tooltipTextColor: {r: 1, g: 1, b: 1, a: 1}
-  tooltipBackgroundColor: {r: 0.1764706, g: 0.25490198, b: 0.33333334, a: 1}
+  tooltipBackgroundColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   customObjPrimaryFont: {fileID: 11400000, guid: 4c39c979f4a8d994cb384e4cc9b66898,
     type: 2}
   customObjSecondaryFont: {fileID: 11400000, guid: f449a63f7e0236c43a556343d7746b27,

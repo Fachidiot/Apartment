@@ -12,6 +12,8 @@ public class Loading : MonoBehaviour
     [Header("Loading Complete")]
     [SerializeField] private GameObject complete;
     [SerializeField] private GameObject completeTMP;
+    [Header("PrevScene")]
+    [SerializeField] private GameObject prevScene;
     [Header("NextScene")]
     [SerializeField] private string nextScene;
 
@@ -28,8 +30,8 @@ public class Loading : MonoBehaviour
 
     public void NextScene()
     {
+        prevScene.SetActive(false);
         AudioManager.Instance.PlayBackgroundMusic();
-        gameObject.SetActive(false);
         SceneManager.LoadScene(nextScene);
     }
 

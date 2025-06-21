@@ -1,14 +1,28 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class DynamicButton : Button
 {
+    [SerializeField] private TMP_Text tmp_text;
+    [SerializeField] private string text;
     [SerializeField] private Graphic[] additionalGraphics;
-    protected Graphic[] Graphics { get
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (tmp_text)
+            tmp_text.text = text;
+    }
+
+    protected Graphic[] Graphics
+    {
+        get
         {
-            if (additionalGraphics == null) //Ä³½ÌÀÌ µÇÁö ¾Ê¾Ò´Ù¸é
-                additionalGraphics = targetGraphic.transform.GetComponentsInChildren<Graphic>(); //ÀÚ½Ä ¿ÀºêÁ§Æ®·ÎºÎÅÍ Graphic ÄÄÆ÷³ÍÆ® ÁöÁ¤
+            if (additionalGraphics == null) // ìºì‹±ì´ ë˜ì§€ ì•Šì•˜ë‹¤ë©´
+                additionalGraphics = targetGraphic.transform.GetComponentsInChildren<Graphic>(); // ìì‹ ì˜¤ë¸Œì íŠ¸ë¡œë¶€í„° Graphic ì»´í¬ë„ŒíŠ¸ ì§€ì •
             return additionalGraphics;
         }
     }
