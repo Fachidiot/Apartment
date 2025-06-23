@@ -8,9 +8,9 @@ public class OptionDataManager : MonoBehaviour
 {
     // Singleton
     private static OptionDataManager m_Instance;
-    public static OptionDataManager Instance { get{ return m_Instance; } }
+    public static OptionDataManager Instance { get { return m_Instance; } }
 
-    private string OptionDataFileName = "\\Option.json";
+    private string OptionDataFileName = "\\Option.json";
     private SystemLanguage m_Language;
 
     public OptionData OptionData;
@@ -112,9 +112,22 @@ public class OptionDataManager : MonoBehaviour
 [Serializable]
 public class OptionData
 {
-    public SystemLanguage language;
+    public Resolution m_Resolution;
+    public bool m_FullScreen;
+
     public int m_CurrentSelectQualityID;
+
     public float m_MasterVolume;
     public float m_BgmVolume;
     public float m_EffectVolume;
+
+    public SystemLanguage language;
+
+    public KeyCode m_KeyMoveLeft;
+    public KeyCode m_KeyMoveRight;
+    public KeyCode m_KeyMoveForward;
+    public KeyCode m_KeyMoveBack;
+
+    public KeyCode m_KeyInventory;
+    public KeyCode m_KeyEscape;
 }

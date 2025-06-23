@@ -7,35 +7,39 @@ public class OptionManager : MonoBehaviour
     [SerializeField]
     private GameObject m_MenuParent;
 
+    [Header("Screen Setting")]
+    [SerializeField] private GameObject Resolution;
+    [SerializeField] private bool Fullscreen;
+
     [Header("Graphic Setting")]
-    [SerializeField]
-    private TMPro.TMP_Dropdown m_QualityDropdown;
+    [SerializeField] private TMPro.TMP_Dropdown m_QualityDropdown;
 
-    [Header("Audio Setting")]
-    [SerializeField]
-    private Slider m_MasterSoundSlider;
-    [SerializeField]
-    private Slider m_BGMSoundSlider;
-    [SerializeField]
-    private Slider m_EffectSoundSlider;
+    [Header("Sound Setting")]
+    [SerializeField] private Slider m_MasterSoundSlider;
+    [SerializeField] private Slider m_BGMSoundSlider;
+    [SerializeField] private Slider m_EffectSoundSlider;
 
-    [Header("System Setting")]
-    [SerializeField]
-    private TMPro.TMP_Dropdown m_LanguageDropdown;
+    [Header("Gameplay Setting")]
+    [SerializeField] private TMPro.TMP_Dropdown m_LanguageDropdown;
 
-    [Header("Customize Setting")]
-    [SerializeField]
-    private GameObject mFPSButton;
+    [Header("Shortcut Setting")]
+    [SerializeField] private KeyCode keyMoveLeft;
+    [SerializeField] private KeyCode keyMoveRight;
+    [SerializeField] private KeyCode keyMoveForward;
+    [SerializeField] private KeyCode keyMoveBack;
+
+    [SerializeField] private KeyCode keyEscape;
+    [SerializeField] private KeyCode keyInventory;
 
     // 설정창 활성화 여부
     private static bool m_IsOpenMenu = false;
 
     public void TryOpenMenu()
     {
-        if (m_IsOpenMenu)   // 설정창 토글
+        if (m_IsOpenMenu)   // 설정창 토글
             CloseMenu();    // 설정 닫기
         else
-            OpenMenu();     // 설정 열기
+            OpenMenu();     // 설정 열기
         m_IsOpenMenu = !m_IsOpenMenu;
     }
 
@@ -46,11 +50,11 @@ public class OptionManager : MonoBehaviour
         m_EffectSoundSlider.SetValueWithoutNotify(OptionDataManager.Instance.OptionData.m_EffectVolume);
 
         m_QualityDropdown.SetValueWithoutNotify(OptionDataManager.Instance.OptionData.m_CurrentSelectQualityID);
-        
+
         switch (OptionDataManager.Instance.OptionData.language)
         {
             case SystemLanguage.Korean:
-                {
+                {
                     m_LanguageDropdown.SetValueWithoutNotify(0);
                     break;
                 }
@@ -60,7 +64,7 @@ public class OptionManager : MonoBehaviour
                     break;
                 }
             case SystemLanguage.English:
-            default:
+            default:
                 {
                     m_LanguageDropdown.SetValueWithoutNotify(1);
                     break;
