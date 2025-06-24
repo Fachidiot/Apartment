@@ -1,0 +1,108 @@
+{
+  "Gallery": [
+    {
+      "Index": 0,
+      "Name": "Posts",
+      "Tooltip": "View all posted images",
+      "Description" : "Explore works posted by users and get inspired. Click on a work to view details, share, or download it."
+    },
+    {
+      "Index": 1,
+      "Name": "My Works",
+      "Tooltip": "View all created works",
+      "Description" : "View, manage, edit, and delete the works you have created."
+    }
+  ],
+  "Generator": [
+    {
+      "Index": 10,
+      "Name": "Character",
+      "Tooltip": "Generate character image",
+      "Description": "Enter a prompt to generate a character image."
+    },
+    {
+      "Index": 11,
+      "Name": "Characters in Bulk",
+      "Tooltip": "Create multiple characters at once based on predefined parameters",
+      "Description" : "Select predefined parameters to generate multiple characters at once.\nThese are fixed settings applied to image generation.\nTo adjust the fixed settings, generate an image first, then use the \"Regenerate\" feature to retrieve and modify the prompt.\n\nFixed Settings:\n- Shot Type: Full-body shot\n- View Type: Front-facing\n- Background: Simple (White to Gray)\n- Aspect Ratio & Resolution: 3:4 (864 × 1152px)"
+    },
+    {
+      "Index": 12,
+      "Name": "Character Pose",
+      "Tooltip": "Create different set of poses with a single character",
+      "Description" : "Enter a single character prompt to generate images in four different poses.\nThese are fixed settings applied to image generation.\nTo adjust the fixed settings, generate an image first, then use the \"Regenerate\"feature to retrieve and modify the prompt.\n\nFixed Settings:\n- Shot Type: Full-body shot\n- Background: Simple (White to Gray)\n- Aspect Ratio & Resolution: Fixed per pose"
+    },
+    {
+      "Index": 13,
+      "Name": "Background",
+      "Tooltip": "Generate background image",
+      "Description": "Enter a prompt to generate a background image."
+    },
+    {
+      "Index": 14,
+      "Name": "UI",
+      "Tooltip": "Generate game UI element",
+      "Description": "Enter a prompt to generate game UI elements."
+    },
+    {
+      "Index": 15,
+      "Name": "Effect",
+      "Tooltip": "Generate special effect image",
+      "Description": "Enter a prompt to generate special effect images."
+    }
+  ],
+  "Editor": [
+    {
+      "Index": 20,
+      "Name": "Facial Expression",
+      "Tooltip": "Detect and modify facial expressions with AI",
+      "Description": "Automatically detects the face and changes the facial expression based on your selection.\nThe expression changes more effectively by following these conditions:\n- The image contains only one face.\n- The face is clearly distinguishable from the background.\n- Enough non-face areas should be included for reference.\n- The Input Image size is recommended to be at least 1024 × 1024px."
+    },
+    {
+      "Index": 21,
+      "Name": "Inpainting",
+      "Tooltip": "Edit Specific areas with AI",
+      "Description": "Select an area to modify and enter a prompt to edit the image. The Input Image size is recommended to be at least 1024 × 1024px."
+    },
+    {
+      "Index": 22,
+      "Name": "Background Remove",
+      "Tooltip": "Remove background from an image",
+      "Description": "Automatically remove the background from an image."
+    },
+    {
+      "Index": 23,
+      "Name": "Enhance",
+      "Tooltip": "Increase resolution and refine details automatically",
+      "Description": "Increase resolution and enhance details automatically. Adjust the enhancement strength to achieve the desired level of image refinement. The Input Image size is recommended to be at least 1024 × 1024px."
+    }
+  ],
+  "Extender": [
+    {
+      "Index": 30,
+      "Name": "Outpainting",
+      "Tooltip": "Extend the image beyond the original dimensions",
+      "Description": "Seamlessly expand the boundary of an image to create new areas. The Input Image size is recommended to be at least 1024 × 1024px."
+    },
+    {
+      "Index": 31,
+      "Name": "Background Loop",
+      "Tooltip": "Seamlessly expand the image vertically or horizontally",
+      "Description": "Extend backgrounds seamlessly to create infinitely repeating horizontal loops."
+    }
+  ],
+  "3D": [
+    {
+      "Index": 40,
+      "Name": "Depth Mesh Converter",
+      "Tooltip": "Convert 2D images to depth maps and 3d meshes",
+      "Description": "Convert 2D images into depth maps and 3D meshes."
+    },
+    {
+      "Index": 41,
+      "Name": "Text2Motion",
+      "Tooltip": "Create animations based on text",
+      "Description": "Generate animations based on text descriptions. The final Output will be saved as an .anim (Humanoid) file.                "
+    }
+  ]
+}

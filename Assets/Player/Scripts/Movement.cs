@@ -3,25 +3,17 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField]
-    private float m_walkSpeed = 5f;         // Ä³¸¯ÅÍÀÇ ÀÌµ¿ ¼Óµµ
-    [SerializeField]
-    private float m_sprintSpeed = 5f;       // Ä³¸¯ÅÍÀÇ ÀÌµ¿ ¼Óµµ
-    [SerializeField]
-    private float m_jumpForce = 10f;        // Á¡ÇÁ Èû
-    [SerializeField]
-    private float m_groundDist = 1f;
-    [SerializeField]
-    private LayerMask m_groundLayer;        // ¶¥À¸·Î ÀÎ½ÄÇÒ ·¹ÀÌ¾î
-    [SerializeField]
-    private SpriteRenderer m_spriteRenderer;
-    [SerializeField]
-    private bool m_isGrounded;              // ¶¥¿¡ ´ê¾ÆÀÖ´ÂÁö ¿©ºÎ
+    [SerializeField] private float m_walkSpeed = 5f;         // ìºë¦­í„°ì˜ ê±·ê¸° ì†ë„
+    [SerializeField] private float m_sprintSpeed = 5f;       // ìºë¦­í„°ì˜ ë›°ê¸° ì†ë„
+    [SerializeField] private float m_jumpForce = 10f;        // ì í”„ í˜
+    [SerializeField] private float m_groundDist = 1f;
+    [SerializeField] private LayerMask m_groundLayer;        // ë•…ìœ¼ë¡œ ì¸ì‹í•  ë ˆì´ì–´
+    [SerializeField] private SpriteRenderer m_spriteRenderer;
+    [SerializeField] private bool m_isGrounded;              // ë•…ì— ë‹¿ì•„ìˆëŠ”ì§€ ì—¬ë¶€
 
     private CapsuleCollider m_capsuleCollider;
-    private Rigidbody m_rigidBody;          // ¹°¸® ÄÄÆ÷³ÍÆ®
+    private Rigidbody m_rigidBody;          // ë¬¼ë¦¬ ì»´í¬ë„ŒíŠ¸
     private Inputs m_inputs;
-
     private GameObject m_interactTarget;
 
     void Start()
@@ -31,13 +23,24 @@ public class Movement : MonoBehaviour
         m_inputs = GetComponent<Inputs>();
     }
 
+    void FixedUpdate()
+    {
+        // ìºë¦­í„°ê°€ ë•…ì— ìˆëŠ”ì§€ í™•ì¸ (ì›í˜• ì¶©ëŒ ê°ì§€)
+        Debug.DrawRay(transform.position, Vector3.down, new Color(0,1,0));
+        m_isGrounded = Physics.Raycast(transform.position - Vector3.down, Vector3.down, m_groundDist, m_groundLayer);
+    }
+
     void Update()
     {
-        // ÀÌµ¿ Ã³¸®
+        // ì¸í„°ë ‰íŠ¸ ì²˜ë¦¬
+        Interaction();
+    }
+
+    void LateUpdate()
+    {
+        // ì´ë™ ì²˜ë¦¬
         Move();
         Jump();
-        // ÀÎÅÍ·ºÆ® Ã³¸®
-        Interaction();
     }
 
     private void Move()
@@ -56,7 +59,7 @@ public class Movement : MonoBehaviour
 
     private void Jump()
     {
-        // Á¡ÇÁ ÀÔ·Â Ã³¸® (½ºÆäÀÌ½º¹Ù¸¦ ´©¸£°í ¶¥¿¡ ÀÖÀ» ¶§¸¸)
+        // ì í”„ ì…ë ¥ ì²˜ë¦¬ (ìŠ¤í˜ì´ìŠ¤ë°”ë¥¼ ëˆ„ë¥´ê³  ë•…ì— ìˆì„ ë•Œë§Œ)
         if (Input.GetButtonDown("Jump") && m_isGrounded)
         {
             m_rigidBody.velocity = new Vector2(m_rigidBody.velocity.x, m_jumpForce);
@@ -72,13 +75,6 @@ public class Movement : MonoBehaviour
 
             m_inputs.interact = false;
         }
-    }
-
-    void FixedUpdate()
-    {
-        Debug.DrawRay(transform.position, Vector3.down, new Color(0,1,0));
-        // Ä³¸¯ÅÍ°¡ ¶¥¿¡ ÀÖ´ÂÁö È®ÀÎ (¿øÇü Ãæµ¹ °¨Áö)
-        m_isGrounded = Physics.Raycast(transform.position - Vector3.down, Vector3.down, m_groundDist, m_groundLayer);
     }
 
     private void OnTriggerStay(Collider other)

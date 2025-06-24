@@ -30,9 +30,11 @@ public class Loading : MonoBehaviour
 
     public void NextScene()
     {
+        GameManager.Instance.StartGame();
         prevScene.SetActive(false);
         AudioManager.Instance.PlayBackgroundMusic();
-        SceneManager.LoadScene(nextScene);
+        gameObject.SetActive(false);
+        // SceneManager.LoadScene(nextScene);
     }
 
     IEnumerator LoadingStart()

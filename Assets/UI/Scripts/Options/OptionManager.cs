@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class OptionManager : MonoBehaviour
 {
-    // 설정창 오브젝트
-    [SerializeField]
-    private GameObject m_MenuParent;
-
     [Header("Screen Setting")]
     [SerializeField] private GameObject Resolution;
     [SerializeField] private bool Fullscreen;
@@ -30,18 +26,6 @@ public class OptionManager : MonoBehaviour
 
     [SerializeField] private KeyCode keyEscape;
     [SerializeField] private KeyCode keyInventory;
-
-    // 설정창 활성화 여부
-    private static bool m_IsOpenMenu = false;
-
-    public void TryOpenMenu()
-    {
-        if (m_IsOpenMenu)   // 설정창 토글
-            CloseMenu();    // 설정 닫기
-        else
-            OpenMenu();     // 설정 열기
-        m_IsOpenMenu = !m_IsOpenMenu;
-    }
 
     public void InitMenuLayouts()
     {
@@ -70,18 +54,6 @@ public class OptionManager : MonoBehaviour
                     break;
                 }
         }
-
-        m_MenuParent.SetActive(false);
-    }
-
-    public void OpenMenu()
-    {
-        m_MenuParent.SetActive(true);
-    }
-
-    public void CloseMenu()
-    {
-        m_MenuParent.SetActive(false);
     }
 
     public void SelectQualityDropdown()
@@ -96,7 +68,8 @@ public class OptionManager : MonoBehaviour
         switch (m_LanguageDropdown.value)
         {
             //한국어
-            case 0:
+            case 0:
+
                 {
                     OptionDataManager.Instance.OptionData.language = SystemLanguage.Korean;
                     break;
@@ -132,10 +105,5 @@ public class OptionManager : MonoBehaviour
     {
         OptionDataManager.Instance.OptionData.m_EffectVolume = m_EffectSoundSlider.value;
         OptionDataManager.Instance.SaveOptionData();
-    }
-
-    public static bool GetIsMenuOpen()
-    {
-        return m_IsOpenMenu;
     }
 }

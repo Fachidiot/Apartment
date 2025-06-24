@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,4 +24,28 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void PauseGame()
+    {
+        if (0 == Time.timeScale)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Test");
+    }
+
+    public void EndGame()
+    {
+        SceneManager.LoadScene("Title");
+    }
+}
+
+public enum GameState
+{
+    Title,
+    Game
 }
