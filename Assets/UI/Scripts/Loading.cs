@@ -14,12 +14,11 @@ public class Loading : MonoBehaviour
     [SerializeField] private GameObject completeTMP;
     [Header("PrevScene")]
     [SerializeField] private GameObject prevScene;
-    [Header("NextScene")]
-    [SerializeField] private string nextScene;
 
     private bool loadingDone = false;
-    private void Start()
+    public void Load()
     {
+        loadingText.LoadingStart();
         StartCoroutine(LoadingStart());
     }
     private void Update()
@@ -34,7 +33,19 @@ public class Loading : MonoBehaviour
         prevScene.SetActive(false);
         AudioManager.Instance.PlayBackgroundMusic();
         gameObject.SetActive(false);
-        // SceneManager.LoadScene(nextScene);
+
+        Init();
+    }
+
+    private void Init()
+    {
+        loadingText.gameObject.SetActive(true);
+        image.Play();
+        image.gameObject.SetActive(true);
+
+        complete.SetActive(false);
+        completeTMP.SetActive(false);
+        loadingDone = false;
     }
 
     IEnumerator LoadingStart()

@@ -18,6 +18,13 @@ using static VHierarchy.Libs.VGUI;
 using static VHierarchy.VHierarchyData;
 using static VHierarchy.VHierarchyCache;
 
+#if UNITY_6000_2_OR_NEWER
+using TreeViewItem = UnityEditor.IMGUI.Controls.TreeViewItem<int>;
+using TreeViewState = UnityEditor.IMGUI.Controls.TreeViewState<int>;
+#endif
+
+
+
 
 
 namespace VHierarchy
@@ -105,7 +112,7 @@ namespace VHierarchy
 
 
 
-                var scrollPos = window.GetMemberValue("m_SceneHierarchy").GetMemberValue<UnityEditor.IMGUI.Controls.TreeViewState>("m_TreeViewState").scrollPos.y;
+                var scrollPos = window.GetMemberValue("m_SceneHierarchy").GetMemberValue<TreeViewState>("m_TreeViewState").scrollPos.y;
 
                 if (scrollPos <= minScrollPos) return;
 
@@ -1779,7 +1786,7 @@ namespace VHierarchy
 
 
 
-        public const string version = "2.1.2";
+        public const string version = "2.1.3";
 
     }
 

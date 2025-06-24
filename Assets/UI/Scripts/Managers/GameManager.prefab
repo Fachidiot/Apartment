@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8707228607071241526}
   - component: {fileID: 7380961068012925167}
+  - component: {fileID: 5557457323115518833}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,3 +48,26 @@ MonoBehaviour:
   levelSelect: {fileID: 0}
   characterInfo: {fileID: 0}
   stageInfo: {fileID: 0}
+  gameState: 1
+--- !u!114 &5557457323115518833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341364406829075984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17fef60ecb6078f409e3d76d28be1fb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyData:
+    m_KeyMoveLeft: 97
+    m_KeyMoveRight: 100
+    m_KeyMoveUp: 119
+    m_KeyMoveDown: 115
+    m_KeyInteract: 101
+    m_KeySprint: 304
+    m_KeyCrouch: 99
+    m_KeyInventory: 9
+    m_KeyEscape: 27

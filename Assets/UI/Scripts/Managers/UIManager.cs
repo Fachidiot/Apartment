@@ -1,47 +1,161 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Michsky.MUIP;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    private static UIManager m_Instance;
+    public static UIManager Instance {get{return m_Instance;}}
+    [Header("Menu UI Panels")]
+    [SerializeField] private GameObject menuUIParent;
+    [SerializeField] private GameObject titleUI;
+    [SerializeField] private GameObject worldMakeUI;
+    [SerializeField] private GameObject characterMakeUI;
+    [SerializeField] private GameObject mapSelectUI;
+    [SerializeField] private ModalWindowManager startGameModal;
+    [SerializeField] private ModalWindowManager exitGameModal;
 
     [Header("Game UI Panels")]
+    [SerializeField] private GameObject gameUIParent;
     [SerializeField] private GameObject HUD_UI;
     [SerializeField] private GameObject mobile_UI;
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private GameInfo pause_GameInfo;
+    [SerializeField] private ModalWindowManager inEndGameModal;
+    [SerializeField] private ModalWindowManager inExitGameModal;
+
+    [Header("Option UI Panels")]
     [SerializeField] private GameObject optionUI;
     [SerializeField] private GameObject[] optionUIs;
 
+    private GameState uiState;
+    private PlayerInputs input;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            m_Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+            Destroy(gameObject);
+
+        GameManager.Instance.TryGetComponent<PlayerInputs>(out input);
+    }
+
     private void Update()
     {
+        if (uiState != GameManager.Instance.CurrentState)
+        {   // Panel 초기화
+            uiState = GameManager.Instance.CurrentState;
+
+            if (GameState.Title == uiState)
+            {
+                menuUIParent.SetActive(true);
+                gameUIParent.SetActive(false);
+                InitMenuUI();
+            }
+            else
+            {
+                menuUIParent.SetActive(false);
+                gameUIParent.SetActive(true);
+                InitGameUI();
+            }
+        }
+
         Inputs();
+    }
+
+    private void InitGameUI()
+    {
+        mobile_UI.SetActive(true);
+        inventoryUI.SetActive(false);
+        pauseUI.SetActive(false);
+        optionUI.SetActive(false);
+        foreach (GameObject obj in optionUIs)
+        {
+            obj.SetActive(false);
+        }
+    }
+
+    private void InitMenuUI()
+    {
+        titleUI.SetActive(true);
+        worldMakeUI.SetActive(false);
+        characterMakeUI.SetActive(false);
+        mapSelectUI.SetActive(false);
+        optionUI.SetActive(false);
+        foreach (GameObject obj in optionUIs)
+        {
+            obj.SetActive(false);
+        }
     }
 
     private void Inputs()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !pauseUI.activeSelf)
-            InventoryToggle();
-        if (Input.GetKeyDown(KeyCode.Escape))
+        switch (GameManager.Instance.CurrentState)
         {
-            int isOptionEnable = IsOptionEnable();
-            if (-1 != isOptionEnable)
-                optionUIs[isOptionEnable].SetActive(false);
-            else if (optionUI.activeSelf)
-                optionUI.SetActive(false);
-            else if (pauseUI.activeSelf) {
-                pauseUI.SetActive(false);
-                GameManager.Instance.PauseGame();
-            }
-            else if (inventoryUI.activeSelf)
-                inventoryUI.SetActive(false);
-            else
-            {
-                pauseUI.SetActive(true);
-                GameManager.Instance.PauseGame();
-            }
+            case GameState.Title:
+                if (input.GetEscape())
+                {
+                    int isOptionEnable = IsOptionEnable();
+                    if (-1 != isOptionEnable)
+                        optionUIs[isOptionEnable].SetActive(false);
+                    else if (optionUI.activeSelf)
+                        optionUI.SetActive(false);
+                    else if (startGameModal.isOn)
+                        startGameModal.Close();
+                    else if (mapSelectUI.activeSelf)
+                    {
+                        mapSelectUI.SetActive(false);
+                        characterMakeUI.SetActive(true);
+                    }
+                    else if (characterMakeUI.activeSelf)
+                    {
+                        characterMakeUI.SetActive(false);
+                        worldMakeUI.SetActive(true);
+                    }
+                    else if (worldMakeUI.activeSelf)
+                    {
+                        worldMakeUI.SetActive(false);
+                        titleUI.SetActive(true);
+                    }
+                    else if (exitGameModal.isOn)
+                        exitGameModal.Close();
+                    else
+                        exitGameModal.Open();
+                }
+                break;
+            case GameState.Game:
+                if (input.GetInventory() && !pauseUI.activeSelf)
+                    InventoryToggle();
+                if (input.GetEscape())
+                {
+                    int isOptionEnable = IsOptionEnable();
+                    if (-1 != isOptionEnable)
+                        optionUIs[isOptionEnable].SetActive(false);
+                    else if (optionUI.activeSelf)
+                        optionUI.SetActive(false);
+                    else if (inExitGameModal.isOn)
+                        inExitGameModal.Close();
+                    else if (inEndGameModal.isOn)
+                        inEndGameModal.Close();
+                    else if (pauseUI.activeSelf)
+                    {
+                        pauseUI.SetActive(false);
+                        GameManager.Instance.PauseGame(false);
+                    }
+                    else if (inventoryUI.activeSelf)
+                        inventoryUI.SetActive(false);
+                    else
+                    {
+                        pauseUI.SetActive(true);
+                        GameManager.Instance.PauseGame(true);
+                    }
+                }
+                break;
         }
     }
 
@@ -51,11 +165,6 @@ public class UIManager : MonoBehaviour
             inventoryUI.SetActive(false);
         else
             inventoryUI.SetActive(true);
-    }
-
-    public void GameManager_PauseGame()
-    {
-        GameManager.Instance.PauseGame();
     }
 
     private int IsOptionEnable()

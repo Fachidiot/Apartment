@@ -15,9 +15,67 @@ MonoBehaviour:
   sceneDatas_byGuid:
     keys:
     - 99c9720ab356a0642a771bea13969a05
+    - 81b1fe362da573e4eb28195cf127251f
+    - 53d0fc807b76a6347b168bad4b67fdd1
     values:
     - goDatas_byGlobalId:
         keys: []
         values: []
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-81b1fe362da573e4eb28195cf127251f-839700513-0
+        - globalObjectIdString: GlobalObjectId_V1-2-81b1fe362da573e4eb28195cf127251f-5934601497316423870-7508158464092508565
+        - globalObjectIdString: GlobalObjectId_V1-2-81b1fe362da573e4eb28195cf127251f-2964377848990295799-2087986647
+        - globalObjectIdString: GlobalObjectId_V1-2-81b1fe362da573e4eb28195cf127251f-8341364406829075984-1536877026
+        - globalObjectIdString: GlobalObjectId_V1-2-81b1fe362da573e4eb28195cf127251f-563336266-0
+        - globalObjectIdString: GlobalObjectId_V1-2-81b1fe362da573e4eb28195cf127251f-1155339140547756396-7508158464092508565
+        values:
+        - colorIndex: 2
+          iconNameOrGuid: Camera Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 3
+          iconNameOrGuid: Canvas Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 9
+          iconNameOrGuid: AudioSource Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 7
+          iconNameOrGuid: Settings Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 0
+          iconNameOrGuid: AvatarMask On Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 2
+          iconNameOrGuid: Settings Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-53d0fc807b76a6347b168bad4b67fdd1-1155339140547756396-316060113
+        - globalObjectIdString: GlobalObjectId_V1-2-53d0fc807b76a6347b168bad4b67fdd1-5934601497316423870-316060113
+        - globalObjectIdString: GlobalObjectId_V1-2-53d0fc807b76a6347b168bad4b67fdd1-8341364406829075984-619258281
+        - globalObjectIdString: GlobalObjectId_V1-2-53d0fc807b76a6347b168bad4b67fdd1-2964377848990295799-8613852206145050416
+        values:
+        - colorIndex: 2
+          iconNameOrGuid: Settings Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 6
+          iconNameOrGuid: Canvas Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 2
+          iconNameOrGuid: Settings Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 3
+          iconNameOrGuid: AudioSource Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
   bookmarks: []
   bookmarkedScenePaths: []

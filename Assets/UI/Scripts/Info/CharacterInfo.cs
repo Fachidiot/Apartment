@@ -20,7 +20,7 @@ public class CharacterInfo : MonoBehaviour
             return;
 
         characterName = _name;
-        //image.sprite = sprite;
+        // image.sprite = sprite;
         selectName.text = _name;
 
         foreach (Character character in characters)

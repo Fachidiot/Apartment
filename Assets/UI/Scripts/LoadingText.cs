@@ -11,11 +11,11 @@ public class LoadingText : MonoBehaviour
     private void Awake()
     {
         text = GetComponent<TMP_Text>();
+        defaultLength = text.text.Length;
     }
 
-    private void Start()
+    public void LoadingStart()
     {
-        defaultLength = text.text.Length;
         StartCoroutine(OnTyping());
     }
 
