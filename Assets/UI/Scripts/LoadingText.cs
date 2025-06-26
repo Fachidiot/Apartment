@@ -27,7 +27,6 @@ public class LoadingText : MonoBehaviour
 
     IEnumerator OnTyping()
     {
-        Debug.Log("Enumerator Stack");
         StringBuilder str = new StringBuilder();
         str.Append(text.text);
         while (true)

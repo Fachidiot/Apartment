@@ -30,19 +30,19 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-81b1fe362da573e4eb28195cf127251f-563336266-0
         - globalObjectIdString: GlobalObjectId_V1-2-81b1fe362da573e4eb28195cf127251f-1155339140547756396-7508158464092508565
         values:
-        - colorIndex: 2
+        - colorIndex: 0
           iconNameOrGuid: Camera Icon
           isIconRecursive: 0
           isColorRecursive: 0
-        - colorIndex: 3
+        - colorIndex: 6
           iconNameOrGuid: Canvas Icon
           isIconRecursive: 0
           isColorRecursive: 0
-        - colorIndex: 9
+        - colorIndex: 3
           iconNameOrGuid: AudioSource Icon
           isIconRecursive: 0
           isColorRecursive: 0
-        - colorIndex: 7
+        - colorIndex: 5
           iconNameOrGuid: Settings Icon
           isIconRecursive: 0
           isColorRecursive: 0
@@ -60,6 +60,7 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-53d0fc807b76a6347b168bad4b67fdd1-5934601497316423870-316060113
         - globalObjectIdString: GlobalObjectId_V1-2-53d0fc807b76a6347b168bad4b67fdd1-8341364406829075984-619258281
         - globalObjectIdString: GlobalObjectId_V1-2-53d0fc807b76a6347b168bad4b67fdd1-2964377848990295799-8613852206145050416
+        - globalObjectIdString: GlobalObjectId_V1-2-53d0fc807b76a6347b168bad4b67fdd1-872826649149306765-316060113
         values:
         - colorIndex: 2
           iconNameOrGuid: Settings Icon
@@ -69,12 +70,16 @@ MonoBehaviour:
           iconNameOrGuid: Canvas Icon
           isIconRecursive: 0
           isColorRecursive: 0
-        - colorIndex: 2
+        - colorIndex: 5
           iconNameOrGuid: Settings Icon
           isIconRecursive: 0
           isColorRecursive: 0
         - colorIndex: 3
           iconNameOrGuid: AudioSource Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 2
+          iconNameOrGuid: 
           isIconRecursive: 0
           isColorRecursive: 0
   bookmarks: []

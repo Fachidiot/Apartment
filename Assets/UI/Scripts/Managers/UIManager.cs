@@ -143,17 +143,11 @@ public class UIManager : MonoBehaviour
                     else if (inEndGameModal.isOn)
                         inEndGameModal.Close();
                     else if (pauseUI.activeSelf)
-                    {
                         pauseUI.SetActive(false);
-                        GameManager.Instance.PauseGame(false);
-                    }
                     else if (inventoryUI.activeSelf)
                         inventoryUI.SetActive(false);
                     else
-                    {
                         pauseUI.SetActive(true);
-                        GameManager.Instance.PauseGame(true);
-                    }
                 }
                 break;
         }

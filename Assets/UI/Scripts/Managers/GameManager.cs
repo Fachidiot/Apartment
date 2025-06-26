@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SelectLevel levelSelect;
     [SerializeField] private CharacterInfo characterInfo;
     [SerializeField] private StageInfo stageInfo;
+    [SerializeField] private GameObject playerPrefab;
 
     [SerializeField] private GameState gameState;
     public GameState CurrentState { get{return gameState;} }

@@ -22,9 +22,9 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // 캐릭터가 땅에 있는지 확인 (원형 충돌 감지)
-        Debug.DrawRay(transform.position, Vector3.down, new Color(0,1,0));
-        m_isGrounded = Physics.Raycast(transform.position - Vector3.down, Vector3.down, m_groundDist, m_groundLayer);
+        // 이동 처리
+        Move();
+        Jump();
     }
 
     void Update()
@@ -35,9 +35,9 @@ public class Movement : MonoBehaviour
 
     void LateUpdate()
     {
-        // 이동 처리
-        Move();
-        Jump();
+        // 캐릭터가 땅에 있는지 확인 (원형 충돌 감지)
+        Debug.DrawRay(transform.position, Vector3.down, new Color(0,1,0));
+        m_isGrounded = Physics.Raycast(transform.position - Vector3.down, Vector3.down, m_groundDist, m_groundLayer);
     }
 
     private void Move()

@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
     private EState m_state;
 
     private Rigidbody m_rigidBody;
-
+    private Transform m_player;
 
     private void Awake()
     {

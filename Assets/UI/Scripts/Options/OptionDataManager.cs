@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Globalization;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class OptionDataManager : MonoBehaviour
 {
@@ -15,8 +16,10 @@ public class OptionDataManager : MonoBehaviour
     [SerializeField] private OptionKeyData initialKey;
 
     private SystemLanguage m_Language;
-    private Resolution[] resolutions;
     private OptionManager m_OptionManager;
+    private List<Resolution> resolutions = new List<Resolution>();
+    public List<Resolution> Resolutions {get{return resolutions;}}
+    // private List<RefreshRate> refreshRates = new List<RefreshRate>();
 
     private void Awake()
     {
@@ -24,23 +27,37 @@ public class OptionDataManager : MonoBehaviour
         {
             m_Instance = this;
             // DontDestroyOnLoad(this);
+
+            m_OptionManager = GetComponent<OptionManager>();
+            
+            // 유저 모니터 해상도 정보 가져오기
+            Resolution[] userResolutions = Screen.resolutions;
+
+            // build시 중복되는 해상도가 만들어지는 오류 <- 주사율때문.
+            string prevItem = "";
+            for (int i = 0; i < userResolutions.Length; ++i)
+            {
+                if (prevItem != userResolutions[i].width + "x" + userResolutions[i].height)
+                {
+                    resolutions.Add(userResolutions[i]);
+                    prevItem = userResolutions[i].width + "x" + userResolutions[i].height;
+                }
+            }
+
+            LoadOptionData();
+            SaveOptionData();
+
+            // 언어 확인 후 UI언어들 초기화
+            InitLanguage();
+
+            // 옵션 확인 후 옵션 UI 초기화
+            m_OptionManager.InitMenuLayouts();
+
+            //품질 설정
+            QualitySettings.SetQualityLevel(OptionData.m_GraphicQuality, true);
         }
         else
             Destroy(gameObject);
-            
-        m_OptionManager = GetComponent<OptionManager>();
-
-        LoadOptionData();
-        SaveOptionData();
-
-        // 언어 확인 후 UI언어들 초기화
-        InitLanguage();
-
-        // 옵션 확인 후 옵션 UI 초기화
-        m_OptionManager.InitMenuLayouts();
-
-        //품질 설정
-        QualitySettings.SetQualityLevel(OptionData.m_GraphicQuality, true);
     }
 
     private void LoadOptionData()
@@ -78,25 +95,20 @@ public class OptionDataManager : MonoBehaviour
         OptionData = new OptionData();
 
         //새로 생성하는 데이터들은 이곳에 선언하기
-        OptionData.m_Language = Application.systemLanguage;
-        OptionData.m_keyData = initialKey;
-        
-        resolutions = Screen.resolutions;
+        OptionData.m_Language = Application.systemLanguage; // 언어 초기 설정
+        OptionData.m_keyData = initialKey;                  // 단축키 초기 설정
 
-        int currentResolutionIndex = 0;
-        double maxRefreshRate = 0;
-
-        for (int i = 0; i < resolutions.Length; ++i)
-        {
-            // 최적의 해상도 저장
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-                currentResolutionIndex = i;
-            if (resolutions[i].refreshRateRatio.value > maxRefreshRate)
-                maxRefreshRate = resolutions[i].refreshRateRatio.value;
+        OptionData.m_VSync = false;
+        for (int i = 0; i < resolutions.Count; ++i)
+        {   // 해상도 초기 설정
+            if (Screen.currentResolution.width.Equals(resolutions[i].width) && Screen.currentResolution.height.Equals(resolutions[i].height))
+                OptionData.m_ScreenResolution = i;
         }
-        OptionData.m_ScreenResolution = currentResolutionIndex;
-        OptionData.m_RefreshRate = maxRefreshRate;
-        OptionData.m_FullScreenMode = FullScreenMode.FullScreenWindow;
+        OptionData.m_FullScreenMode = FullScreenMode.FullScreenWindow;  // 화면 모드 초기 설정
+
+        OptionData.m_MasterVolume = 1;
+        OptionData.m_BGMVolume = 1;
+        OptionData.m_EffectVolume = 1;
         
         //옵션 데이터 저장
         SaveOptionData();
@@ -138,7 +150,7 @@ public class OptionData
     public FullScreenMode m_FullScreenMode;
     public float m_ScreenBrightness;
     public int m_ScreenResolution;
-    public double m_RefreshRate;
+    public int m_RefreshRate;
     
     [Header("Graphic")]
     public int m_GraphicQuality;
@@ -148,7 +160,7 @@ public class OptionData
 
     [Header("Sound")]
     public float m_MasterVolume;
-    public float m_BgmVolume;
+    public float m_BGMVolume;
     public float m_EffectVolume;
 
     [Header("Gameplay")]

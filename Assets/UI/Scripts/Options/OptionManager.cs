@@ -5,6 +5,9 @@ using Michsky.MUIP;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using UnityEngine.InputSystem.Controls;
+using VInspector.Libs;
+using System.Collections.ObjectModel;
 
 public class OptionManager : MonoBehaviour
 {
@@ -13,13 +16,12 @@ public class OptionManager : MonoBehaviour
     [SerializeField] private HorizontalSelector m_Fullscreen;
     [SerializeField] private Slider m_Brightness;
     [SerializeField] private CustomDropdown m_Resolution;
-    public CustomDropdown Resolution{get{return m_Resolution;}}
 
     [Header("Graphic Setting")]
-    [SerializeField] private TMP_Dropdown m_QualityDropdown;
-    [SerializeField] private TMP_Dropdown m_ShadowDropdown;
-    [SerializeField] private TMP_Dropdown m_AODropdown;
-    [SerializeField] private TMP_Dropdown m_ReflectionDropdown;
+    [SerializeField] private HorizontalSelector m_QualityDropdown;
+    [SerializeField] private HorizontalSelector m_ShadowDropdown;
+    [SerializeField] private HorizontalSelector m_AODropdown;
+    [SerializeField] private HorizontalSelector m_ReflectionDropdown;
 
     [Header("Sound Setting")]
     [SerializeField] private Slider m_MasterSoundSlider;
@@ -27,82 +29,90 @@ public class OptionManager : MonoBehaviour
     [SerializeField] private Slider m_EffectSoundSlider;
 
     [Header("Gameplay Setting")]
-    [SerializeField] private TMP_Dropdown m_LanguageDropdown;
+    [SerializeField] private HorizontalSelector m_LanguageSelector;
     [SerializeField] private Toggle m_ScreenVibration;
 
     [Header("Shortcut Setting")]
-    [SerializeField] private KeyCode m_KeyMoveLeft;
-    [SerializeField] private KeyCode m_KeyMoveRight;
-    [SerializeField] private KeyCode m_KeyMoveForward;
-    [SerializeField] private KeyCode m_KeyMoveBack;
+    [SerializeField] private Button m_KeyMoveLeft;
+    [SerializeField] private Button m_KeyMoveRight;
+    [SerializeField] private Button m_KeyMoveBack;
+    [SerializeField] private Button m_KeyMoveForward;
+    [SerializeField] private Button m_KeyJump;
+    [SerializeField] private Button m_KeyInteract;
+    [SerializeField] private Button m_KeyInventory;
+    [SerializeField] private Button m_KeyEscape;
 
-    [SerializeField] private KeyCode m_KeyEscape;
-    [SerializeField] private KeyCode m_KeyInventory;
-
-    private List<Resolution> resolutions = new List<Resolution>();
+    private KeyInput inputKey = KeyInput.NONE;
 
     public void InitMenuLayouts()
     {
-        Resolution[] temp = Screen.resolutions;
-        HashSet<CustomDropdown.Item> options = new HashSet<CustomDropdown.Item>();
-        // build시 중복되는 해상도가 만들어지는 오류.
-        string prevItem = "";
-        int index = 0;
-        for (int i = 0; i < temp.Length; ++i)
-        {
-            if (prevItem != temp[i].width + "x" + temp[i].height)
-            {
-                resolutions.Add(temp[i]);
-                CustomDropdown.Item item = new CustomDropdown.Item();
-                item.itemName = temp[i].width + "x" + temp[i].height;
-                item.itemIndex = index++;
-
-                options.Add(item);
-                prevItem = item.itemName;
-            }
+        // V-Sync
+        m_VSync.isOn = OptionDataManager.Instance.OptionData.m_VSync;
+        // FullScreenMode 설정
+        m_Fullscreen.defaultIndex = (int)OptionDataManager.Instance.OptionData.m_FullScreenMode - 1;
+        // Brightness
+        m_Brightness.value = OptionDataManager.Instance.OptionData.m_ScreenBrightness;
+        // Resolution
+        HashSet<CustomDropdown.Item> resolutionOptions = new HashSet<CustomDropdown.Item>();
+        for (int i = 0; i < OptionDataManager.Instance.Resolutions.Count; ++i)
+        {   // DropDown 설정
+            CustomDropdown.Item item = new CustomDropdown.Item();
+            item.itemName = OptionDataManager.Instance.Resolutions[i].width + "x" + OptionDataManager.Instance.Resolutions[i].height;
+            item.itemIndex = i;
+            resolutionOptions.Add(item);
         }
-        m_Resolution.items = new List<CustomDropdown.Item>(options);
+        m_Resolution.items = new List<CustomDropdown.Item>(resolutionOptions);
         m_Resolution.selectedItemIndex = OptionDataManager.Instance.OptionData.m_ScreenResolution;
         m_Resolution.SetupDropdown();
 
+        // Quality
+        m_QualityDropdown.defaultIndex = OptionDataManager.Instance.OptionData.m_GraphicQuality;
+        // Shadow
+        m_ShadowDropdown.defaultIndex = OptionDataManager.Instance.OptionData.m_ShadowQuality;
+        // AO
+        m_AODropdown.defaultIndex = OptionDataManager.Instance.OptionData.m_AmbientOcclusion;
+        // Reflection
+        m_ReflectionDropdown.defaultIndex = OptionDataManager.Instance.OptionData.m_ReflectionQuality;
+
+        // Sounds
         m_MasterSoundSlider.SetValueWithoutNotify(OptionDataManager.Instance.OptionData.m_MasterVolume);
-        m_BGMSoundSlider.SetValueWithoutNotify(OptionDataManager.Instance.OptionData.m_BgmVolume);
+        AudioManager.Instance.MasterVolume = OptionDataManager.Instance.OptionData.m_MasterVolume;
+        m_BGMSoundSlider.SetValueWithoutNotify(OptionDataManager.Instance.OptionData.m_BGMVolume);
+        AudioManager.Instance.BGMVolume = OptionDataManager.Instance.OptionData.m_BGMVolume;
         m_EffectSoundSlider.SetValueWithoutNotify(OptionDataManager.Instance.OptionData.m_EffectVolume);
+        AudioManager.Instance.EffectVolume = OptionDataManager.Instance.OptionData.m_EffectVolume;
 
-        // m_QualityDropdown.SetValueWithoutNotify(OptionDataManager.Instance.OptionData.m_GraphicQuality);
-
-        // switch (OptionDataManager.Instance.OptionData.m_Language)
-        // {
-        //     case SystemLanguage.Korean:
-        //         {
-        //             m_LanguageDropdown.SetValueWithoutNotify(0);
-        //             break;
-        //         }
-        //     case SystemLanguage.Japanese:
-        //         {
-        //             m_LanguageDropdown.SetValueWithoutNotify(2);
-        //             break;
-        //         }
-        //     case SystemLanguage.English:
-        //     default:
-        //         {
-        //             m_LanguageDropdown.SetValueWithoutNotify(1);
-        //             break;
-        //         }
-        // }
+        // Language
+        switch (OptionDataManager.Instance.OptionData.m_Language)
+        {
+            case SystemLanguage.Korean:
+                m_LanguageSelector.defaultIndex = 0;
+                break;
+            case SystemLanguage.English:
+                m_LanguageSelector.defaultIndex = 1;
+                break;
+            case SystemLanguage.Japanese:
+                m_LanguageSelector.defaultIndex = 2;
+                break;
+        }
+        // ScreenVibration
+        m_ScreenVibration.isOn = OptionDataManager.Instance.OptionData.m_ScreenVibration;
+        
+        m_KeyMoveLeft.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveLeft.ToString();
+        m_KeyMoveRight.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveRight.ToString();
+        m_KeyMoveBack.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveUp.ToString();
+        m_KeyMoveForward.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveDown.ToString();
+        m_KeyJump.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyJump.ToString();
+        // m_KeyMoveLeft.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeySprint.ToString();
+        // m_KeyMoveLeft.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyCrouch.ToString();
+        m_KeyInteract.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyInteract.ToString();
+        m_KeyInventory.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyInventory.ToString();
     }
 
-    public void SetResolution(int resolutionIndex)
+    public void SetVSync(bool vsync)
     {
-        // 주사율 계산
-        RefreshRate refreshRate = new RefreshRate();
-        refreshRate.numerator = (uint)Math.Round(OptionDataManager.Instance.OptionData.m_RefreshRate) * 1000;
-        refreshRate.denominator = 1001;
-        Debug.Log(refreshRate.value);
-
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, OptionDataManager.Instance.OptionData.m_FullScreenMode, refreshRate);
-        OptionDataManager.Instance.OptionData.m_ScreenResolution = resolutionIndex;
+        QualitySettings.vSyncCount = vsync ? 1 : 0;
+        OptionDataManager.Instance.OptionData.m_VSync = vsync;
         OptionDataManager.Instance.SaveOptionData();
     }
 
@@ -113,23 +123,74 @@ public class OptionManager : MonoBehaviour
         SetResolution(OptionDataManager.Instance.OptionData.m_ScreenResolution);
     }
 
-    public void SetRefreshRate(int refreshRate)
+    public void SetBrightness(float brightness)
     {
-        OptionDataManager.Instance.OptionData.m_RefreshRate = refreshRate;
-        OptionDataManager.Instance.SaveOptionData();
-        SetResolution(OptionDataManager.Instance.OptionData.m_ScreenResolution);
-    }
-
-    public void SelectQualityDropdown()
-    {
-        QualitySettings.SetQualityLevel(m_QualityDropdown.value, true);
-        OptionDataManager.Instance.OptionData.m_GraphicQuality = m_QualityDropdown.value;
+        // TODO : 밝기 조절 스크립트 필요
+        OptionDataManager.Instance.OptionData.m_ScreenBrightness = brightness;
         OptionDataManager.Instance.SaveOptionData();
     }
 
-    public void SelectLangDropdown()
+    public void SetResolution(int resolutionIndex)
     {
-        switch (m_LanguageDropdown.value)
+        Resolution resolution = OptionDataManager.Instance.Resolutions[resolutionIndex];
+
+        Screen.SetResolution(resolution.width, resolution.height, OptionDataManager.Instance.OptionData.m_FullScreenMode, Screen.currentResolution.refreshRateRatio);
+        OptionDataManager.Instance.OptionData.m_ScreenResolution = resolutionIndex;
+        OptionDataManager.Instance.SaveOptionData();
+    }
+
+    public void QualitySelector(int quality)
+    {
+        QualitySettings.SetQualityLevel(quality, true);
+        OptionDataManager.Instance.OptionData.m_GraphicQuality = quality;
+        OptionDataManager.Instance.SaveOptionData();
+    }
+
+    public void ShadowQualitySelector(int quality)
+    {
+        QualitySettings.SetQualityLevel(quality, true);
+        OptionDataManager.Instance.OptionData.m_ShadowQuality = quality;
+        OptionDataManager.Instance.SaveOptionData();
+    }
+
+    public void AOSelector(int quality)
+    {
+        QualitySettings.SetQualityLevel(quality, true);
+        OptionDataManager.Instance.OptionData.m_AmbientOcclusion = quality;
+        OptionDataManager.Instance.SaveOptionData();
+    }
+
+    public void ReflectionQualitySelector(int quality)
+    {
+        QualitySettings.SetQualityLevel(quality, true);
+        OptionDataManager.Instance.OptionData.m_ReflectionQuality = quality;
+        OptionDataManager.Instance.SaveOptionData();
+    }
+
+    public void MasterValueChanged()
+    {
+        AudioManager.Instance.MasterVolume = m_MasterSoundSlider.value;
+        OptionDataManager.Instance.OptionData.m_MasterVolume = m_MasterSoundSlider.value;
+        OptionDataManager.Instance.SaveOptionData();
+    }
+
+    public void BGMValueChanged()
+    {
+        AudioManager.Instance.BGMVolume = m_BGMSoundSlider.value;
+        OptionDataManager.Instance.OptionData.m_BGMVolume = m_BGMSoundSlider.value;
+        OptionDataManager.Instance.SaveOptionData();
+    }
+
+    public void EffectValueChanged()
+    {
+        AudioManager.Instance.EffectVolume = m_EffectSoundSlider.value;
+        OptionDataManager.Instance.OptionData.m_EffectVolume = m_EffectSoundSlider.value;
+        OptionDataManager.Instance.SaveOptionData();
+    }
+
+    public void SelectLangDropdown(int language)
+    {
+        switch (language)
         {
             //한국어
             case 0:
@@ -146,21 +207,86 @@ public class OptionManager : MonoBehaviour
         OptionDataManager.Instance.SaveOptionData();
     }
 
-    public void MasterValueChanged()
+    public void SetScreenVibration(bool vibration)
     {
-        OptionDataManager.Instance.OptionData.m_MasterVolume = m_MasterSoundSlider.value;
+        // TODO : 화면 흔들림 설정 스크립트 필요
+        OptionDataManager.Instance.OptionData.m_ScreenVibration = vibration;
         OptionDataManager.Instance.SaveOptionData();
     }
 
-    public void BGMValueChanged()
+    public void ShortCutInput(int keyCode)
     {
-        OptionDataManager.Instance.OptionData.m_BgmVolume = m_BGMSoundSlider.value;
-        OptionDataManager.Instance.SaveOptionData();
+        inputKey = (KeyInput)keyCode;
     }
 
-    public void EffectValueChanged()
+    void OnGUI()
     {
-        OptionDataManager.Instance.OptionData.m_EffectVolume = m_EffectSoundSlider.value;
-        OptionDataManager.Instance.SaveOptionData();
+        if (KeyInput.NONE != inputKey)
+        {
+            Event keyEvent = Event.current;
+            if (keyEvent.isKey)
+            {
+                if (KeyCode.Escape == keyEvent.keyCode)
+                {
+                    inputKey = KeyInput.NONE;
+                    return;
+                }
+                switch (inputKey)
+                {
+                    case KeyInput.LEFT:
+                        OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveLeft = keyEvent.keyCode;
+                        m_KeyMoveLeft.GetComponentInChildren<TMP_Text>().text = keyEvent.keyCode.ToString();
+                        break;
+                    case KeyInput.RIGHT:
+                        OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveRight = keyEvent.keyCode;
+                        m_KeyMoveRight.GetComponentInChildren<TMP_Text>().text = keyEvent.keyCode.ToString();
+                        break;
+                    case KeyInput.UP:
+                        OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveUp = keyEvent.keyCode;
+                        m_KeyMoveBack.GetComponentInChildren<TMP_Text>().text = keyEvent.keyCode.ToString();
+                        break;
+                    case KeyInput.DOWN:
+                        OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveDown = keyEvent.keyCode;
+                        m_KeyMoveForward.GetComponentInChildren<TMP_Text>().text = keyEvent.keyCode.ToString();
+                        break;
+                    case KeyInput.JUMP:
+                        OptionDataManager.Instance.OptionData.m_keyData.m_KeyJump = keyEvent.keyCode;
+                        m_KeyJump.GetComponentInChildren<TMP_Text>().text = keyEvent.keyCode.ToString();
+                        break;
+                    case KeyInput.SPRINT:
+                        OptionDataManager.Instance.OptionData.m_keyData.m_KeySprint = keyEvent.keyCode;
+                        m_KeyMoveLeft.GetComponentInChildren<TMP_Text>().text = keyEvent.keyCode.ToString();
+                        break;
+                    case KeyInput.CROUCH:
+                        OptionDataManager.Instance.OptionData.m_keyData.m_KeyCrouch = keyEvent.keyCode;
+                        m_KeyMoveLeft.GetComponentInChildren<TMP_Text>().text = keyEvent.keyCode.ToString();
+                        break;
+                    case KeyInput.INTERACT:
+                        OptionDataManager.Instance.OptionData.m_keyData.m_KeyInteract = keyEvent.keyCode;
+                        m_KeyInteract.GetComponentInChildren<TMP_Text>().text = keyEvent.keyCode.ToString();
+                        break;
+                    case KeyInput.INVENTORY:
+                        OptionDataManager.Instance.OptionData.m_keyData.m_KeyInventory = keyEvent.keyCode;
+                        m_KeyInventory.GetComponentInChildren<TMP_Text>().text = keyEvent.keyCode.ToString();
+                        break;
+                }
+                inputKey = KeyInput.NONE;
+            }
+        }
     }
+}
+
+[Serializable]
+public enum KeyInput
+{
+    NONE,
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN,
+    JUMP,
+    SPRINT,
+    CROUCH,
+    INTERACT,
+    INVENTORY
 }

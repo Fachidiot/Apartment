@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
     private static AudioManager m_Instance;
-    public static AudioManager Instance{get{return m_Instance;}}
+    public static AudioManager Instance { get { return m_Instance; } }
     [SerializeField] private AudioClip[] lobbyMusicClips;
     [SerializeField] private AudioClip[] loadingMusicClips;
     [SerializeField] private AudioClip[] backgroundMusicClips;
+
+    private float m_masterVolume;
+    public float MasterVolume { set { m_masterVolume = value; VolumeUpdate();} }
+    private float m_bgmVolume;
+    public float BGMVolume { set { m_bgmVolume = value; VolumeUpdate();} }
+    private float m_effectVolume;
+    public float EffectVolume { set { m_effectVolume = value; VolumeUpdate();} }
 
     private AudioSource audioSource;
 
@@ -57,5 +65,11 @@ public class AudioManager : MonoBehaviour
         int random = Random.Range(0, backgroundMusicClips.Length);
         audioSource.clip = backgroundMusicClips[random];
         audioSource.Play();
+    }
+
+    private void VolumeUpdate()
+    {
+        audioSource.volume = m_masterVolume * m_bgmVolume;
+        // audioSource.volume = m_masterVolume * m_effectVolume;
     }
 }
