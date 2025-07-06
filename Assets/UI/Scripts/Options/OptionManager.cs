@@ -42,6 +42,8 @@ public class OptionManager : MonoBehaviour
     [SerializeField] private Button m_KeyInventory;
     [SerializeField] private Button m_KeyEscape;
 
+    [SerializeField] private ModalWindowManager m_ShortcutModal;
+
     private KeyInput inputKey = KeyInput.NONE;
 
     public void InitMenuLayouts()
@@ -228,7 +230,36 @@ public class OptionManager : MonoBehaviour
             {
                 if (KeyCode.Escape == keyEvent.keyCode)
                 {
-                    inputKey = KeyInput.NONE;
+                    switch (inputKey)
+                    {
+                        case KeyInput.LEFT:
+                            m_KeyMoveLeft.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveLeft.ToString();
+                            break;
+                        case KeyInput.RIGHT:
+                            m_KeyMoveRight.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveRight.ToString();
+                            break;
+                        case KeyInput.UP:
+                            m_KeyMoveBack.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveUp.ToString();
+                            break;
+                        case KeyInput.DOWN:
+                            m_KeyMoveForward.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyMoveDown.ToString();
+                            break;
+                        case KeyInput.JUMP:
+                            m_KeyJump.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyJump.ToString();
+                            break;
+                        case KeyInput.SPRINT:
+                            m_KeyMoveLeft.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeySprint.ToString();
+                            break;
+                        case KeyInput.CROUCH:
+                            m_KeyMoveLeft.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyCrouch.ToString();
+                            break;
+                        case KeyInput.INTERACT:
+                            m_KeyInteract.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyInteract.ToString();
+                            break;
+                        case KeyInput.INVENTORY:
+                            m_KeyInventory.GetComponentInChildren<TMP_Text>().text = OptionDataManager.Instance.OptionData.m_keyData.m_KeyInventory.ToString();
+                            break;
+                    }
                     return;
                 }
                 switch (inputKey)
@@ -271,6 +302,7 @@ public class OptionManager : MonoBehaviour
                         break;
                 }
                 inputKey = KeyInput.NONE;
+                m_ShortcutModal.Close();
             }
         }
     }

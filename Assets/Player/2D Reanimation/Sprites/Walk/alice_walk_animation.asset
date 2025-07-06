@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f1da0b6abdb7d45aa4315eccab639b, type: 3}
+  m_Name: alice_walk_animation
+  m_EditorClassIdentifier: 
+  cels:
+  - sprite: {fileID: 21300000, guid: 70005ef0f591ec249bddbb922f8c6480, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: 21300000, guid: 3785ef288ab72db4d8760d8e4cc21afd, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: 21300000, guid: 338f1cec7edb3b347933f1cf69ede56e, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: 21300000, guid: cc40056aa2d84fd41a359b017eabb1d6, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: 21300000, guid: 89d8609425f42b0408839e4d5d64219a, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: 21300000, guid: 4c7e0cc7a33f1bd4ebc5cf2a54908a6d, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: 21300000, guid: 17fddf58f0ba25745b1074a365d840a5, type: 3}
+    drivers:
+      keys: []
+      values: 
+  - sprite: {fileID: 21300000, guid: 8c33b6741632d45439b4f832ca153fe3, type: 3}
+    drivers:
+      keys: []
+      values: 
+  controlDriver:
+    name: walk
+    autoIncrement: 1
+    percentageBased: 0
+    guid: cd2d827c-3da7-429a-a684-e0453f11cef0
+  drivers:
+    keys: []
+    values: 

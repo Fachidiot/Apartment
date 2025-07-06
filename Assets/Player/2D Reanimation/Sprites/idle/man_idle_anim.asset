@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f1da0b6abdb7d45aa4315eccab639b, type: 3}
+  m_Name: man_idle_anim
+  m_EditorClassIdentifier: 
+  cels:
+  - sprite: {fileID: 21300000, guid: 691e395bb78c2204081426a62f4609de, type: 3}
+    drivers:
+      keys: []
+      values: 
+  controlDriver:
+    name: Idle
+    autoIncrement: 0
+    percentageBased: 0
+    guid: 79b7289d-dca8-48c6-a668-a8bd3f13525c
+  drivers:
+    keys: []
+    values: 

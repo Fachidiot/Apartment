@@ -54,7 +54,7 @@ public class Loading : MonoBehaviour
         AsyncOperation async = Application.LoadLevelAsync("Test");
         while (async.isDone == false)
         {   //LoadingBar를 NGUI로 하나 만들고 NGUI의 ProgressBar의 SliderValue 값에 넣어 줍니다.
-            Debug.Log(async.progress);
+            // Debug.Log(async.progress);
             Time.timeScale = 0;
             yield return true;
         }

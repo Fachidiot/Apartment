@@ -95,9 +95,7 @@ public class OptionDataManager : MonoBehaviour
         OptionData = new OptionData();
 
         //새로 생성하는 데이터들은 이곳에 선언하기
-        OptionData.m_Language = Application.systemLanguage; // 언어 초기 설정
-        OptionData.m_keyData = initialKey;                  // 단축키 초기 설정
-
+        // Screens
         OptionData.m_VSync = false;
         for (int i = 0; i < resolutions.Count; ++i)
         {   // 해상도 초기 설정
@@ -105,10 +103,26 @@ public class OptionDataManager : MonoBehaviour
                 OptionData.m_ScreenResolution = i;
         }
         OptionData.m_FullScreenMode = FullScreenMode.FullScreenWindow;  // 화면 모드 초기 설정
+        OptionData.m_ScreenBrightness = 0.5f;
 
+        // Graphics
+        OptionData.m_GraphicQuality = QualitySettings.GetQualityLevel();
+            // TODO : 추후 수정 필요
+        OptionData.m_ShadowQuality = QualitySettings.GetQualityLevel();
+        OptionData.m_AmbientOcclusion = QualitySettings.GetQualityLevel();
+        OptionData.m_ReflectionQuality = QualitySettings.GetQualityLevel();
+
+        // Sounds
         OptionData.m_MasterVolume = 1;
         OptionData.m_BGMVolume = 1;
         OptionData.m_EffectVolume = 1;
+
+        // Gameplays
+        OptionData.m_ScreenVibration = true;
+        OptionData.m_Language = Application.systemLanguage; // 언어 초기 설정
+
+        // Shortcut
+        OptionData.m_keyData = initialKey;                  // 단축키 초기 설정
         
         //옵션 데이터 저장
         SaveOptionData();

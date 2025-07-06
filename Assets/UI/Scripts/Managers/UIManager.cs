@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     [Header("Option UI Panels")]
     [SerializeField] private GameObject optionUI;
     [SerializeField] private GameObject[] optionUIs;
+    [SerializeField] private ModalWindowManager shortcutModal;
 
     private GameState uiState;
     private PlayerInputs input;
@@ -100,9 +101,10 @@ public class UIManager : MonoBehaviour
             case GameState.Title:
                 if (input.GetEscape())
                 {
-                    int isOptionEnable = IsOptionEnable();
-                    if (-1 != isOptionEnable)
-                        optionUIs[isOptionEnable].SetActive(false);
+                    if (shortcutModal.isOn)
+                        shortcutModal.Close();
+                    else if (-1 != IsOptionEnable())
+                        optionUIs[IsOptionEnable()].SetActive(false);
                     else if (optionUI.activeSelf)
                         optionUI.SetActive(false);
                     else if (startGameModal.isOn)
@@ -133,9 +135,10 @@ public class UIManager : MonoBehaviour
                     InventoryToggle();
                 if (input.GetEscape())
                 {
-                    int isOptionEnable = IsOptionEnable();
-                    if (-1 != isOptionEnable)
-                        optionUIs[isOptionEnable].SetActive(false);
+                    if (shortcutModal.isOn)
+                        shortcutModal.Close();
+                    else if (-1 != IsOptionEnable())
+                        optionUIs[IsOptionEnable()].SetActive(false);
                     else if (optionUI.activeSelf)
                         optionUI.SetActive(false);
                     else if (inExitGameModal.isOn)

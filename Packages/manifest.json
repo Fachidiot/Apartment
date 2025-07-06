@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.aarthificial.reanimation": "https://github.com/aarthificial/reanimation.git",
     "com.unity.cinemachine": "2.10.3",
     "com.unity.collab-proxy": "2.7.1",
     "com.unity.editorcoroutines": "1.0.0",
