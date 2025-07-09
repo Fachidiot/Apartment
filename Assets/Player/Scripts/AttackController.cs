@@ -4,8 +4,8 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
     [Header("Base Attack")]
-    [SerializeField] private Attack m_BaseAttack;
-    [SerializeField] private Weapon m_CurrentWeapon;
+    [SerializeField] private Attack _baseAttack;
+    [SerializeField] private Weapon _currentWeapon;
 
     public void DoAttack(Weapon _weapon = null)
     {
@@ -15,7 +15,7 @@ public class AttackController : MonoBehaviour
         }
         else
         {   // 무기가 없을때
-            Debug.Log(m_BaseAttack);
+            Debug.Log(_baseAttack);
         }
     }
 }

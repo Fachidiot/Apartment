@@ -634,12 +634,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddfa9c3e9beaa046b2b996c9721ff5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BaseAttack:
+  _baseAttack:
     m_Amount: 1
     m_State: 0
     m_StateTime: 0
     m_CoolTime: 0
-  m_CurrentWeapon:
+  _currentWeapon:
     m_Name: 
     m_Type: 0
     m_CanThrowable: 0
@@ -679,10 +679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96f89a0d85126f4686c53ebc7992774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - m_Name: 
-    m_Type: 0
-    m_CanThrowable: 0
+  _weapons: []
 --- !u!114 &563336278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,13 +755,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dbda70716e6a264eafb7e1a2bcb122b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 0.25, y: -0.1, z: 0.25}
-  maxDistance: 0.11
-  groundLayer:
+  _boxSize: {x: 0.5, y: 0.25, z: 0.5}
+  _maxDistance: 1
+  _groundLayer:
     serializedVersion: 2
-    m_Bits: 8
-  drawGizmo: 1
-  debugConsole: 0
+    m_Bits: 0
+  _drawGizmo: 0
+  _debugConsole: 0
 --- !u!1 &839700513
 GameObject:
   m_ObjectHideFlags: 0

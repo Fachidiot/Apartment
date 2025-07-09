@@ -1,18 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] private Weapon[] weapons;
+    [SerializeField] private Weapon[] _weapons;
 
-    private int m_weaponIndex;
+    private int _weaponIndex;
 
     public Weapon GetCurrentWeapon()
     {
-        return weapons[m_weaponIndex];
+        if (_weapons.Length <= _weaponIndex || -1 > _weaponIndex)
+            return null;
+        return _weapons[_weaponIndex];
     }
 }
 
