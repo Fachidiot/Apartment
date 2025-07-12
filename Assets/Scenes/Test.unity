@@ -755,11 +755,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dbda70716e6a264eafb7e1a2bcb122b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boxSize: {x: 0.5, y: 0.25, z: 0.5}
-  _maxDistance: 1
+  _boxSize: {x: 0.5, y: -0.1, z: 0.5}
+  _maxDistance: 0.11
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   _drawGizmo: 0
   _debugConsole: 0
 --- !u!1 &839700513
@@ -1926,7 +1926,7 @@ PrefabInstance:
     - target: {fileID: 610657506899789173, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -470.16132
+      value: -505
       objectReference: {fileID: 0}
     - target: {fileID: 679331794194195901, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
@@ -2861,7 +2861,7 @@ PrefabInstance:
     - target: {fileID: 2576927768101777468, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -470.16132
+      value: -505
       objectReference: {fileID: 0}
     - target: {fileID: 2601339478562206414, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
@@ -3226,7 +3226,7 @@ PrefabInstance:
     - target: {fileID: 3098328909119604794, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -470.16132
+      value: -505
       objectReference: {fileID: 0}
     - target: {fileID: 3102722190416987060, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
@@ -3251,7 +3251,7 @@ PrefabInstance:
     - target: {fileID: 3102722190416987060, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -470.16132
+      value: -505
       objectReference: {fileID: 0}
     - target: {fileID: 3125616104654547497, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
@@ -3371,7 +3371,7 @@ PrefabInstance:
     - target: {fileID: 3554199656804024485, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -505.16132
+      value: -540
       objectReference: {fileID: 0}
     - target: {fileID: 3652655648985189677, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
@@ -3401,7 +3401,7 @@ PrefabInstance:
     - target: {fileID: 3653467988773900021, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -6.2999954
+      value: -6.300003
       objectReference: {fileID: 0}
     - target: {fileID: 3783807895739584007, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
@@ -4486,7 +4486,7 @@ PrefabInstance:
     - target: {fileID: 6666860502546082771, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -470.16132
+      value: -505
       objectReference: {fileID: 0}
     - target: {fileID: 6708780966935923136, guid: e37fac9e18a7f9749a44471510ec9f1c,
         type: 3}

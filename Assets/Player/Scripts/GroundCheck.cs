@@ -5,8 +5,8 @@ using UnityEngine;
 public class GroundCheck : MonoBehaviour
 {
     [Header("Boxcast Property")]
-    [SerializeField] private Vector3 _boxSize = new Vector3(0.5f, 0.25f, 0.5f);
-    [SerializeField] private float _maxDistance = 1f;
+    [SerializeField] private Vector3 _boxSize = new Vector3(0.5f, -0.1f, 0.5f);
+    [SerializeField] private float _maxDistance = 0.11f;
     [SerializeField] private LayerMask _groundLayer;
 
     [Header("Debug")]
